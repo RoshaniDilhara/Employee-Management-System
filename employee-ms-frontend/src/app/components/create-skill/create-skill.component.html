@@ -1,0 +1,22 @@
+<mat-toolbar>
+  <span class="example-spacer"></span>
+  <button  align="end" class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="=-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+
+<form [formGroup]="skillService.form" (submit)="onSubmit()">
+  <mat-grid-list cols=1 rowHeight="200px">
+    <mat-grid-tile>
+      <div class = "controls-container">
+        <input type="hidden" formControlName="id">
+        <mat-form-field>
+          <input formControlName="skill_name" matInput placeholder="Skill Name*">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
+        <div class="button-row">
+          <button mat-raised-button color="primary" type="submit" [disabled]="skillService.form.invalid">Submit</button>
+          <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>

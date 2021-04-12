@@ -1,0 +1,63 @@
+<div class="search-div">
+  <div class="button-row">
+    <button mat-raised-button (click)="onCreate()">
+      <mat-icon>add</mat-icon>
+      Create Employee
+    </button>
+    <button mat-raised-button (click)="onCreateSkill()">
+      <mat-icon>add</mat-icon>
+      Create Skill
+    </button>
+    <button mat-raised-button (click)="onViewSkills()">
+      <mat-icon>add</mat-icon>
+      View Skills
+    </button>
+  </div>
+</div>
+
+<div class="example-container mat-elevation-z8">
+<table mat-table [dataSource]="employees" >
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name" sticky>
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- DOB Column -->
+  <ng-container matColumnDef="dob">
+    <th mat-header-cell *matHeaderCellDef> DOB </th>
+    <td mat-cell *matCellDef="let element"> {{element.dob | date:'yyyy-MM-dd'}} </td>
+  </ng-container>
+
+  <!-- Email Column -->
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+
+<!--   skills Column-->
+  <ng-container matColumnDef="skills">
+    <th mat-header-cell *matHeaderCellDef> Skills </th>
+    <td mat-cell *matCellDef="let element"> {{getSkills(element)}} </td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions" stickyEnd>
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <mat-cell *matCellDef="let row" class="button-row">
+        <button mat-mini-fab color="warn" (click)="deleteEmployee(row.id)" color="warn"><mat-icon>delete_outline</mat-icon></button>
+        <button mat-mini-fab color="primary" (click)="onEdit(row)"><mat-icon>update</mat-icon></button>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="loading">
+    <mat-footer-cell *matFooterCellDef colspan="6"> Loading Data... </mat-footer-cell>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':employees!=null}"></mat-footer-row>
+</table>
+</div>
